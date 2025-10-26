@@ -51,19 +51,12 @@ export default class FormValidator {
   }
 
   _setEventListeners() {
-    this._inputList = Array.from(
-      this._form.querySelectorAll(this._settings.inputSelector)
-    );
-    this._buttonElement = this._form.querySelector(
-      this._settings.submitButtonSelector
-    );
-
     this._toggleButtonState();
 
     this._inputList.forEach((inputElement) => {
       inputElement.addEventListener("input", () => {
         this._checkInputValidity(inputElement);
-        this._toggleButtonState();
+        this._toggleButtonState(); // Centralized button state change
       });
     });
 
@@ -83,9 +76,6 @@ export default class FormValidator {
     this._inputList.forEach((inputElement) =>
       this._hideInputError(inputElement)
     );
-    if (this._buttonElement) {
-      this._buttonElement.classList.add(this._settings.inactiveButtonClass);
-      this._buttonElement.disabled = true;
-    }
+    this._toggleButtonState(); // Centralized button state change
   }
 }
