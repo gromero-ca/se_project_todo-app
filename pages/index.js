@@ -20,6 +20,25 @@ const closeModal = (modal) => {
   modal.classList.remove("popup_visible");
 };
 
+document.addEventListener("keydown", (e) => {
+  if (e.key === "Escape" && addTodoPopup.classList.contains("popup_visible")) {
+    closeModal(addTodoPopup);
+  }
+});
+
+addTodoForm.addEventListener("keydown", (e) => {
+  if (e.key === "Enter") {
+    const target = e.target;
+    if (target && target.tagName === "INPUT") {
+      if (typeof addTodoForm.requestSubmit === "function") {
+        addTodoForm.requestSubmit();
+      } else {
+        addTodoForm.dispatchEvent(new Event("submit", { cancelable: true }));
+      }
+    }
+  }
+});
+
 const generateTodo = (data) => {
   const todo = new Todo(data, "#todo-template");
   return todo.getView();

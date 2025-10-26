@@ -70,6 +70,11 @@
   cursor: pointer;
 }
 
+.todo__delete-btn:hover {
+  opacity: 0.85;
+  text-decoration: underline;
+}
+
 .todo__delete-btn::before {
   content: "Delete";
 }
@@ -106,4 +111,9 @@
   .todo__delete-btn::before {
     content: "";
   }
+}
+
+.todo__completed:hover {
+  border-color: #555;
+  box-shadow: 0 0 0 4px rgba(0, 0, 0, 0.03);
 }
