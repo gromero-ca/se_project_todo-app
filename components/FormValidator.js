@@ -56,7 +56,7 @@ export default class FormValidator {
     this._inputList.forEach((inputElement) => {
       inputElement.addEventListener("input", () => {
         this._checkInputValidity(inputElement);
-        this._toggleButtonState(); // Centralized button state change
+        this._toggleButtonState();
       });
     });
 
@@ -76,6 +76,6 @@ export default class FormValidator {
     this._inputList.forEach((inputElement) =>
       this._hideInputError(inputElement)
     );
-    this._toggleButtonState(); // Centralized button state change
+    this._toggleButtonState();
   }
 }
