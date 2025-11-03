@@ -1,4 +1,4 @@
-import { initialTodos, validationConfig } from "../utils/constants.js";
+import { initialTodos, validationConfig, SELECTORS } from "../utils/constants.js";
 import Todo from "../components/Todo.js";
 import { v4 as uuidv4 } from "https://jspm.dev/uuid";
 import FormValidator from "../components/FormValidator.js";
@@ -7,7 +7,7 @@ import PopupWithForm from "../components/PopupWithForm.js";
 import TodoCounter from "../components/TodoCounter.js";
 
 const addTodoButton = document.querySelector(".button_action_add");
-const addTodoForm = document.querySelector("#add-todo-form");
+const addTodoForm = document.querySelector(SELECTORS.addTodoForm);
 
 const addFormValidator = new FormValidator(validationConfig, addTodoForm);
 addFormValidator.enableValidation();
@@ -26,7 +26,7 @@ const generateTodo = (data) => {
     todoCounter.updateCompleted(isChecked);
   };
 
-  const todo = new Todo(data, "#todo-template", handleDeleteTodo, handleCheckboxChange);
+  const todo = new Todo(data, SELECTORS.todoTemplate, handleDeleteTodo, handleCheckboxChange);
   return todo.getView();
 };
 
@@ -36,12 +36,12 @@ const section = new Section({
     const todoElement = generateTodo(item);
     section.addItem(todoElement);
   },
-  containerSelector: ".todos__list",
+  containerSelector: SELECTORS.todoList,
 });
 
 section.renderItems();
 
-const addTodoPopup = new PopupWithForm("#add-todo-popup", (values) => {
+const addTodoPopup = new PopupWithForm(SELECTORS.addTodoPopup, (values) => {
   const name = values.name;
   const dateInput = values.date;
 
@@ -61,17 +61,4 @@ addTodoPopup.setEventListeners();
 
 addTodoButton.addEventListener("click", () => {
   addTodoPopup.open();
-});
-
-addTodoForm.addEventListener("keydown", (e) => {
-  if (e.key === "Enter") {
-    const target = e.target;
-    if (target && target.tagName === "INPUT") {
-      if (typeof addTodoForm.requestSubmit === "function") {
-        addTodoForm.requestSubmit();
-      } else {
-        addTodoForm.dispatchEvent(new Event("submit", { cancelable: true }));
-      }
-    }
-  }
 });

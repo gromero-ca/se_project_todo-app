@@ -5,11 +5,6 @@ export const SELECTORS = {
   addTodoForm: "#add-todo-form",
 };
 
-export const CLASS_NAMES = {
-  todo: "todo",
-  todoName: "todo__name",
-};
-
 export const initialTodos = [
   {
     id: "7cec7373-681b-49d9-b065-021d61a69d03",
