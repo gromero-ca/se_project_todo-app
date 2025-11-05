@@ -30,12 +30,14 @@ const generateTodo = (data) => {
   return todo.getView();
 };
 
+const renderTodo = (item) => {
+  const todoElement = generateTodo(item);
+  section.addItem(todoElement);
+};
+
 const section = new Section({
   items: initialTodos,
-  renderer: (item) => {
-    const todoElement = generateTodo(item);
-    section.addItem(todoElement);
-  },
+  renderer: renderTodo,
   containerSelector: SELECTORS.todoList,
 });
 
@@ -50,8 +52,7 @@ const addTodoPopup = new PopupWithForm(SELECTORS.addTodoPopup, (values) => {
   const id = uuidv4();
 
   const todoData = { id, name, date };
-  const todoElement = generateTodo(todoData);
-  section.addItem(todoElement);
+  renderTodo(todoData);
   todoCounter.updateTotal(true);
   addFormValidator.resetValidation();
   addTodoPopup.close();

@@ -59,8 +59,6 @@ export default class FormValidator {
         this._toggleButtonState();
       });
     });
-
-    this._form.addEventListener("submit", (evt) => evt.preventDefault());
   }
 
   enableValidation() {
